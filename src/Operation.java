@@ -8,4 +8,7 @@ public class Operation {
     public String getDescription() {
         return description;
     }
+    public void setDescription () {
+        this.description = description;
+    }
 }
