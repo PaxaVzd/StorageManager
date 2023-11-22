@@ -66,6 +66,7 @@ public class Storage {
      * @throws StockException Виникає, якщо вказаної кількості продукту немає на складі.
      */
     public void removeProduct(String productName, int quantity) throws StockException {
+        // break
         for (Product product : productQuantities.keySet()) {
             if (product.getName().equals(productName)) {
                 int productQuantity = productQuantities.get(product);
