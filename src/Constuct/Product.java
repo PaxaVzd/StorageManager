@@ -12,7 +12,7 @@ public class Product {
     /**
      * Кількість одиниць товару.
      */
-    private int quantity;
+    private final int quantity;
 
     /**
      * Опис товару.
@@ -57,15 +57,6 @@ public class Product {
      */
     public int getQuantity() {
         return quantity;
-    }
-
-    /**
-     * Встановлює нову кількість одиниць товару.
-     *
-     * @param quantity Нова кількість одиниць товару.
-     */
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     /**

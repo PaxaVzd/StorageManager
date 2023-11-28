@@ -22,12 +22,12 @@ public class Storage {
     /**
      * Карта, яка відображає продукти на складі та їх кількість.
      */
-    private Map<Product, Integer> productQuantities;
+    private final Map<Product, Integer> productQuantities;
 
     /**
      * Список операцій, які відбулися на складі.
      */
-    private List<Operation> operationHistory;
+    private final List<Operation> operationHistory;
 
     /**
      * Конструктор для створення об'єкта складу з початковими значеннями.
@@ -66,7 +66,8 @@ public class Storage {
      * @throws StockException Виникає, якщо вказаної кількості продукту немає на складі.
      */
     public void removeProduct(String productName, int quantity) throws StockException {
-        // break
+        boolean foundProduct = false;
+
         for (Product product : productQuantities.keySet()) {
             if (product.getName().equals(productName)) {
                 int productQuantity = productQuantities.get(product);
@@ -77,7 +78,8 @@ public class Storage {
                             " видалено зі складу. Поточна місткість: " + currentCapacity;
                     System.out.println(operationDescription);
                     addToHistory(new Operation(operationDescription));
-                    return;
+                    foundProduct = true;
+                    break;  // Вийти з циклу, оскільки товар видалено
                 } else {
                     throw new StockException("На складі недостатньо товару " + productName +
                             " для видалення вказаної кількості.");
@@ -85,8 +87,11 @@ public class Storage {
             }
         }
 
-        throw new StockException("Товар " + productName + " не знайдено на складі.");
+        if (!foundProduct) {
+            throw new StockException("Товар " + productName + " не знайдено на складі.");
+        }
     }
+
 
     /**
      * Отримує карту, що містить продукти на складі та їх кількість.
